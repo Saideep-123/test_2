@@ -9,21 +9,21 @@
 </head>
 <body>
 
-<!-- Hero Banner -->
+<!-- Hero -->
 <div class="hero">
   <div>
-    <h1> Konaseema Specials</h1>
-  <!-- <button onclick="scrollToTop()">Order Now</button> -->
+    <h1>Konaseema Specials</h1>
+    <button onclick="scrollToTop()">Order Now</button>
   </div>
 </div>
 
 <!-- Header -->
 <header>
+  <div class="logo" onclick="scrollToTop()"> Konaseema</div>
   <div class="search-wrapper">
     <input id="search" class="search" placeholder="Search" oninput="searchItems(this.value)">
     <button class="clear-btn" onclick="clearSearch()">×</button>
   </div>
-  <div class="logo" onclick="scrollToTop()">Special Foods</div>
   <div>
     <button class="toggle" onclick="toggleDark()">🌙</button>
     <button onclick="toggleCart()">🛒 <span id="count">0</span></button>
@@ -41,10 +41,10 @@
   <button onclick="setCat('Pickles',this)">Pickles</button>
 </div>
 
-<!-- Featured Items (Horizontal Carousel) -->
+<!-- Featured Items -->
 <div class="featured" id="featured"></div>
 
-<!-- Product Grid -->
+<!-- Products Grid -->
 <div class="products" id="products"></div>
 
 <!-- Modal -->
@@ -70,8 +70,9 @@
   </div>
 </div>
 
-<!-- Cart -->
+<!-- Cart / Order Summary -->
 <div class="cart" id="cart">
+  <span class="cart-close" onclick="toggleCart()">✖</span>
   <h3>Your Order</h3>
   <div id="cartItems"></div>
   <p>Total: ₹<span id="total">0</span></p>
@@ -79,13 +80,10 @@
   <button class="primary" onclick="checkout()">Order on WhatsApp</button>
 </div>
 
-<!-- WhatsApp Button -->
-<button class="whatsapp-btn" onclick="checkout()">🟢 Order on WhatsApp</button>
-
 <!-- Toast -->
 <div id="toast">Item Added to Cart ✅</div>
 
-<!-- Footer / Bottom Banner -->
+<!-- Footer -->
 <footer>
   <div class="footer-section">
     <h4>Policies</h4>
