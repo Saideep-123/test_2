@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Konaseema Specials – WhatsApp Menu</title>
+<title>Home – WhatsApp Menu</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -11,14 +11,17 @@
 
 <div class="hero">
   <div>
-    <h1>Konaseema Specials 🌸</h1>
+    <h1>Home 🌸</h1>
     <button onclick="scrollToTop()">Order Now</button>
   </div>
 </div>
 
 <header>
-  <input class="search" placeholder="Search" oninput="searchItems(this.value)">
-  <div class="logo" onclick="scrollToTop()">Konaseema Specials</div>
+  <div class="search-wrapper">
+    <input id="search" class="search" placeholder="Search" oninput="searchItems(this.value)">
+    <button class="clear-btn" onclick="clearSearch()">×</button>
+  </div>
+  <div class="logo" onclick="scrollToTop()">Home</div>
   <div>
     <button class="toggle" onclick="toggleDark()">🌙</button>
     <button onclick="toggleCart()">🛒 <span id="count">0</span></button>
@@ -76,6 +79,32 @@
 
 <!-- Toast Notification -->
 <div id="toast">Item Added to Cart ✅</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-section">
+    <h4>Policies</h4>
+    <ul>
+      <li>Return & Refund Policy</li>
+      <li>Delivery Policy</li>
+      <li>Privacy Policy</li>
+      <li>Terms and Conditions</li>
+    </ul>
+  </div>
+  <div class="footer-section">
+    <h4>About Us</h4>
+    <p>Home is a specialized food delivery service for all types of Godavari delicacies ranging from Sweets, Snacks, Pickles, and many more. <a href="#">Read more &gt;&gt;</a></p>
+  </div>
+  <div class="footer-section">
+    <h4>Our Locations</h4>
+    <p>Kalyan Nagar -1, Hyderabad 500045<br>H.no 6-40, West Vipparru, Pentapadu Mandal, West Godavari District - 534165</p>
+  </div>
+  <div class="footer-section">
+    <h4>Contact Us</h4>
+    <p>Customer Care: 080-62179046<br>Monday to Saturday - 9 AM to 12 PM<br>Queries: support@godavarivantillu.com</p>
+  </div>
+  <p class="footer-copy">© 2026, Home</p>
+</footer>
 
 <script src="script.js"></script>
 </body>
