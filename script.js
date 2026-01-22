@@ -1,18 +1,20 @@
 // Admin
 const ADMIN_PHONE='7989301401';
 
-// Sample items
+// Items
 let items=[
 {name:'Ugadi Pachadi',cat:'Ugadi',base:150,img:'https://images.unsplash.com/photo-1617196032282-7f1e2bdf9e34?auto=format&fit=crop&w=400&q=80',desc:'Fresh Ugadi Pachadi'},
 {name:'Neem Flower Pachadi',cat:'Ugadi',base:160,img:'https://images.unsplash.com/photo-1617196032282-7f1e2bdf9e34?auto=format&fit=crop&w=400&q=80',desc:'Delicious Neem Flower Pachadi'},
-{name:'Pootharekulu',cat:'Sweets',base:120,img:'https://images.unsplash.com/photo-1617196032300-f0ef4b7b6c4f?auto=format&w=400&q=80',desc:'Crispy Pootharekulu'},
+{name:'Pootharekulu',cat:'Sweets',base:120,img:'https://images.unsplash.com/photo-1617196032300-f0ef4b7b6c4f?auto=format&fit=crop&w=400&q=80',desc:'Crispy Pootharekulu'},
 {name:'Kaju Ladoo',cat:'Sweets',base:200,img:'https://images.unsplash.com/photo-1617196032305-f1ef4b7b6c5f?auto=format&w=400&q=80',desc:'Delicious Kaju Ladoo'},
 {name:'Chekkalu',cat:'Snacks',base:100,img:'https://images.unsplash.com/photo-1617196032310-94f171f1f1f3?auto=format&w=400&q=80',desc:'Tasty Chekkalu'},
 {name:'Murukulu',cat:'Snacks',base:90,img:'https://images.unsplash.com/photo-1617196032311-94f171f1f2f4?auto=format&w=400&q=80',desc:'Crunchy Murukulu'},
 {name:'Kandi Podi',cat:'Podis',base:140,img:'https://images.unsplash.com/photo-1617196032315-1f1f3f1f2f2f?auto=format&w=400&q=80',desc:'Spicy Kandi Podi'},
 {name:'Minapa Papad',cat:'Papads',base:50,img:'https://images.unsplash.com/photo-1617196032320-3f1f3f1f2f4f?auto=format&w=400&q=80',desc:'Crispy Minapa Papad'},
 {name:'Avakaya',cat:'Pickles',base:200,img:'https://images.unsplash.com/photo-1617196032330-4f1f3f1f2f5f?auto=format&w=400&q=80',desc:'Tangy Avakaya Pickle'},
-{name:'Gongura Pickle',cat:'Pickles',base:220,img:'https://images.unsplash.com/photo-1617196032335-5f1f3f1f2f6f?auto=format&w=400&q=80',desc:'Spicy Gongura Pickle'}
+{name:'Gongura Pickle',cat:'Pickles',base:220,img:'https://images.unsplash.com/photo-1617196032335-5f1f3f1f2f6f?auto=format&w=400&q=80',desc:'Spicy Gongura Pickle'},
+{name:'Pulihora',cat:'Snacks',base:130,img:'https://images.unsplash.com/photo-1617196032340-6f1f3f1f2f7f?auto=format&w=400&q=80',desc:'Tangy Tamarind Rice'},
+{name:'Bobbatlu',cat:'Sweets',base:180,img:'https://images.unsplash.com/photo-1617196032345-7f1f3f1f2f8f?auto=format&w=400&q=80',desc:'Sweet stuffed flatbreads'}
 ];
 
 let cat='All',activeItem=null,weight=500,modalQty=1,cart={},count=0,total=0,search='';
@@ -30,6 +32,7 @@ const cartDiv=document.getElementById('cart');
 const totalEl=document.getElementById('total');
 const toast=document.getElementById('toast');
 
+// Render products
 function render(){
     pDiv.innerHTML='';
     items.filter(i=>(cat==='All'||i.cat===cat)&&i.name.toLowerCase().includes(search))
@@ -42,14 +45,16 @@ function render(){
     });
 }
 
+// Featured with animation
 function renderFeatured(){
     featuredDiv.innerHTML='';
-    items.slice(0,5).forEach((i,idx)=>{
+    items.filter(i=>cat==='All'||i.cat===cat).slice(0,5).forEach((i)=>{
         const div=document.createElement('div');
-        div.className='featured-item';
+        div.className='featured-item hide';
         div.innerHTML=`<img src="${i.img}"><div class="info"><strong>${i.name}</strong><p>₹${i.base}</p></div>`;
         div.onclick=()=>openModal(items.indexOf(i));
         featuredDiv.appendChild(div);
+        setTimeout(()=>div.classList.remove('hide'),50);
     });
 }
 
@@ -65,7 +70,6 @@ function openModal(i){
     document.querySelector('.weight-boxes span:nth-child(2)').classList.add('active');
     document.getElementById('modalQty').innerText=modalQty;
 }
-
 function closeModal(){modal.classList.remove('active');}
 function setWeight(w,e){weight=w;document.querySelectorAll('.weight-boxes span').forEach(s=>s.classList.remove('active'));e.classList.add('active');updatePrice();}
 function updatePrice(){mPrice.innerText=Math.round(activeItem.base*(weight/500));}
@@ -104,7 +108,7 @@ function change(k,d){
 }
 
 function toggleCart(){cartDiv.classList.toggle('open');}
-function setCat(c,e){cat=c;document.querySelectorAll('.categories button').forEach(b=>b.classList.remove('active'));e.classList.add('active');render();}
+function setCat(c,e){cat=c;document.querySelectorAll('.categories button').forEach(b=>b.classList.remove('active'));e.classList.add('active');render(); renderFeatured();}
 function searchItems(v){search=v.toLowerCase();render();}
 function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}
 function toggleDark(){document.body.classList.toggle('dark');}
@@ -122,5 +126,5 @@ function showToast(){
     setTimeout(()=>{toast.style.opacity=0;},1500);
 }
 
-render();
-renderFeatured();
+// Initialize
+render(); renderFeatured();
