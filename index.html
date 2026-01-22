@@ -9,6 +9,7 @@
 </head>
 <body>
 
+<!-- Hero Banner -->
 <div class="hero">
   <div>
     <h1>Home 🌸</h1>
@@ -16,6 +17,7 @@
   </div>
 </div>
 
+<!-- Header -->
 <header>
   <div class="search-wrapper">
     <input id="search" class="search" placeholder="Search" oninput="searchItems(this.value)">
@@ -28,8 +30,7 @@
   </div>
 </header>
 
-<div class="featured" id="featured"></div>
-
+<!-- Categories -->
 <div class="categories">
   <button class="active" onclick="setCat('All',this)">All</button>
   <button onclick="setCat('Ugadi',this)">🌸 Ugadi</button>
@@ -40,6 +41,10 @@
   <button onclick="setCat('Pickles',this)">Pickles</button>
 </div>
 
+<!-- Featured Items (Horizontal Carousel) -->
+<div class="featured" id="featured"></div>
+
+<!-- Product Grid -->
 <div class="products" id="products"></div>
 
 <!-- Modal -->
@@ -47,7 +52,7 @@
   <div class="modal-content">
     <span class="modal-close" onclick="closeModal()">✖</span>
     <h3 id="mName"></h3>
-    <img id="mImg" style="width:100%;border-radius:16px;margin-bottom:.6rem" loading="lazy">
+    <img id="mImg" loading="lazy">
     <p id="mDesc"></p>
     <strong>Choose Weight</strong>
     <div class="weight-boxes">
@@ -74,13 +79,13 @@
   <button class="primary" onclick="checkout()">Order on WhatsApp</button>
 </div>
 
-<!-- Sticky WhatsApp Button -->
+<!-- WhatsApp Button -->
 <button class="whatsapp-btn" onclick="checkout()">🟢 Order on WhatsApp</button>
 
-<!-- Toast Notification -->
+<!-- Toast -->
 <div id="toast">Item Added to Cart ✅</div>
 
-<!-- Footer -->
+<!-- Footer / Bottom Banner -->
 <footer>
   <div class="footer-section">
     <h4>Policies</h4>
@@ -91,18 +96,22 @@
       <li>Terms and Conditions</li>
     </ul>
   </div>
+
   <div class="footer-section">
     <h4>About Us</h4>
-    <p>Home is a specialized food delivery service for all types of Godavari delicacies ranging from Sweets, Snacks, Pickles, and many more. <a href="#">Read more &gt;&gt;</a></p>
+    <p>Home is a specialized food delivery service for all types of Godavari delicacies ranging from Sweets, Snacks, Pickles, and more. <a href="#">Read more &gt;&gt;</a></p>
   </div>
+
   <div class="footer-section">
     <h4>Our Locations</h4>
     <p>Kalyan Nagar -1, Hyderabad 500045<br>H.no 6-40, West Vipparru, Pentapadu Mandal, West Godavari District - 534165</p>
   </div>
+
   <div class="footer-section">
     <h4>Contact Us</h4>
-    <p>Customer Care: 080-62179046<br>Monday to Saturday - 9 AM to 12 PM<br>Queries: support@godavarivantillu.com</p>
+    <p>Customer Care: 080-62179046<br>Monday to Saturday - 9 AM to 12 PM<br>Email: support@godavarivantillu.com</p>
   </div>
+
   <p class="footer-copy">© 2026, Home</p>
 </footer>
 
