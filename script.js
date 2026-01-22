@@ -1,20 +1,18 @@
-// Admin Phone
 const ADMIN_PHONE='7989301401';
 
-// Items: 50+ Godavari-style foods
+// Sample Items (50+)
 let items=[
 {name:'Ugadi Pachadi',cat:'Ugadi',base:150,img:'https://images.unsplash.com/photo-1617196032282-7f1e2bdf9e34?auto=format&fit=crop&w=400&q=80',desc:'Fresh Ugadi Pachadi'},
 {name:'Neem Flower Pachadi',cat:'Ugadi',base:160,img:'https://images.unsplash.com/photo-1617196032282-7f1e2bdf9e34?auto=format&w=400&q=80',desc:'Delicious Neem Flower Pachadi'},
 {name:'Pootharekulu',cat:'Sweets',base:120,img:'https://images.unsplash.com/photo-1617196032300-f0ef4b7b6c4f?auto=format&w=400&q=80',desc:'Crispy Pootharekulu'},
 {name:'Kaju Ladoo',cat:'Sweets',base:200,img:'https://images.unsplash.com/photo-1617196032305-f1ef4b7b6c5f?auto=format&w=400&q=80',desc:'Delicious Kaju Ladoo'},
-{name:'Bobbatlu',cat:'Sweets',base:180,img:'https://images.unsplash.com/photo-1617196032345-7f1f3f1f2f8f?auto=format&w=400&q=80',desc:'Sweet stuffed flatbreads'},
 {name:'Chekkalu',cat:'Snacks',base:100,img:'https://images.unsplash.com/photo-1617196032310-94f171f1f1f3?auto=format&w=400&q=80',desc:'Tasty Chekkalu'},
 {name:'Murukulu',cat:'Snacks',base:90,img:'https://images.unsplash.com/photo-1617196032311-94f171f1f2f4?auto=format&w=400&q=80',desc:'Crunchy Murukulu'},
 {name:'Pulihora',cat:'Snacks',base:130,img:'https://images.unsplash.com/photo-1617196032340-6f1f3f1f2f7f?auto=format&w=400&q=80',desc:'Tangy Tamarind Rice'},
 {name:'Kandi Podi',cat:'Podis',base:140,img:'https://images.unsplash.com/photo-1617196032315-1f1f3f1f2f2f?auto=format&w=400&q=80',desc:'Spicy Kandi Podi'},
 {name:'Minapa Pappad',cat:'Papads',base:50,img:'https://images.unsplash.com/photo-1617196032320-3f1f3f1f2f4f?auto=format&w=400&q=80',desc:'Crispy Minapa Papad'},
-{name:'Avakaya',cat:'Pickles',base:200,img:'https://images.unsplash.com/photo-1617196032330-4f1f3f1f2f5f?auto=format&w=400&q=80',desc:'Tangy Avakaya Pickle'},
-// (add remaining 38 items similarly)
+{name:'Avakaya',cat:'Pickles',base:200,img:'https://images.unsplash.com/photo-1617196032330-4f1f3f1f2f5f?auto=format&w=400&q=80',desc:'Tangy Avakaya Pickle'}
+// Add remaining 40+ items similarly
 ];
 
 // State
@@ -87,15 +85,15 @@ function addToCart(){
     cart[key].qty+=modalQty;
     count+=modalQty; total+=price*modalQty;
     updateCart();
-    closeModal(); // auto close modal
+    closeModal();
     showToast();
 }
 function updateCart(){
     cartItems.innerHTML=''; countEl.innerText=count; totalEl.innerText=total;
     for(let k in cart){
         const div=document.createElement('div');
-        div.className='cart-item added';
-        div.innerHTML=`${k} x${cart[k].qty} <span><button onclick="change('${k}',-1)">-</button><button onclick="change('${k}',1)">+</button></span>`;
+        div.className='cart-item';
+        div.innerHTML=`<span>${k} x${cart[k].qty}</span> <span><button onclick="change('${k}',-1)">-</button><button onclick="change('${k}',1)">+</button></span>`;
         cartItems.appendChild(div);
     }
 }
@@ -126,13 +124,6 @@ function checkout(){
 
 // Toast
 function showToast(){toast.style.opacity=1;setTimeout(()=>{toast.style.opacity=0;},1500);}
-
-// Auto-scroll Featured
-setInterval(()=>{
-    if(featuredDiv.children.length>0){
-        featuredDiv.appendChild(featuredDiv.children[0]);
-    }
-},3000);
 
 // Initialize
 render(); renderFeatured();
