@@ -1,0 +1,126 @@
+// Admin
+const ADMIN_PHONE='7989301401';
+
+// Sample items
+let items=[
+{name:'Ugadi Pachadi',cat:'Ugadi',base:150,img:'https://images.unsplash.com/photo-1617196032282-7f1e2bdf9e34?auto=format&fit=crop&w=400&q=80',desc:'Fresh Ugadi Pachadi'},
+{name:'Neem Flower Pachadi',cat:'Ugadi',base:160,img:'https://images.unsplash.com/photo-1617196032282-7f1e2bdf9e34?auto=format&fit=crop&w=400&q=80',desc:'Delicious Neem Flower Pachadi'},
+{name:'Pootharekulu',cat:'Sweets',base:120,img:'https://images.unsplash.com/photo-1617196032300-f0ef4b7b6c4f?auto=format&w=400&q=80',desc:'Crispy Pootharekulu'},
+{name:'Kaju Ladoo',cat:'Sweets',base:200,img:'https://images.unsplash.com/photo-1617196032305-f1ef4b7b6c5f?auto=format&w=400&q=80',desc:'Delicious Kaju Ladoo'},
+{name:'Chekkalu',cat:'Snacks',base:100,img:'https://images.unsplash.com/photo-1617196032310-94f171f1f1f3?auto=format&w=400&q=80',desc:'Tasty Chekkalu'},
+{name:'Murukulu',cat:'Snacks',base:90,img:'https://images.unsplash.com/photo-1617196032311-94f171f1f2f4?auto=format&w=400&q=80',desc:'Crunchy Murukulu'},
+{name:'Kandi Podi',cat:'Podis',base:140,img:'https://images.unsplash.com/photo-1617196032315-1f1f3f1f2f2f?auto=format&w=400&q=80',desc:'Spicy Kandi Podi'},
+{name:'Minapa Papad',cat:'Papads',base:50,img:'https://images.unsplash.com/photo-1617196032320-3f1f3f1f2f4f?auto=format&w=400&q=80',desc:'Crispy Minapa Papad'},
+{name:'Avakaya',cat:'Pickles',base:200,img:'https://images.unsplash.com/photo-1617196032330-4f1f3f1f2f5f?auto=format&w=400&q=80',desc:'Tangy Avakaya Pickle'},
+{name:'Gongura Pickle',cat:'Pickles',base:220,img:'https://images.unsplash.com/photo-1617196032335-5f1f3f1f2f6f?auto=format&w=400&q=80',desc:'Spicy Gongura Pickle'}
+];
+
+let cat='All',activeItem=null,weight=500,modalQty=1,cart={},count=0,total=0,search='';
+
+const pDiv=document.getElementById('products');
+const featuredDiv=document.getElementById('featured');
+const modal=document.getElementById('modal');
+const mName=document.getElementById('mName');
+const mDesc=document.getElementById('mDesc');
+const mImg=document.getElementById('mImg');
+const mPrice=document.getElementById('mPrice');
+const countEl=document.getElementById('count');
+const cartItems=document.getElementById('cartItems');
+const cartDiv=document.getElementById('cart');
+const totalEl=document.getElementById('total');
+const toast=document.getElementById('toast');
+
+function render(){
+    pDiv.innerHTML='';
+    items.filter(i=>(cat==='All'||i.cat===cat)&&i.name.toLowerCase().includes(search))
+    .forEach((i,idx)=>{
+        const div=document.createElement('div');
+        div.className='product';
+        div.innerHTML=`<img src="${i.img}"><div class="info"><strong>${i.name}</strong><p>₹${i.base}</p></div>`;
+        div.onclick=()=>openModal(idx);
+        pDiv.appendChild(div);
+    });
+}
+
+function renderFeatured(){
+    featuredDiv.innerHTML='';
+    items.slice(0,5).forEach((i,idx)=>{
+        const div=document.createElement('div');
+        div.className='featured-item';
+        div.innerHTML=`<img src="${i.img}"><div class="info"><strong>${i.name}</strong><p>₹${i.base}</p></div>`;
+        div.onclick=()=>openModal(items.indexOf(i));
+        featuredDiv.appendChild(div);
+    });
+}
+
+function openModal(i){
+    activeItem=items[i];
+    weight=500; modalQty=1;
+    modal.classList.add('active');
+    mName.innerText=activeItem.name;
+    mDesc.innerText=activeItem.desc;
+    mImg.src=activeItem.img;
+    mPrice.innerText=activeItem.base;
+    document.querySelectorAll('.weight-boxes span').forEach(s=>s.classList.remove('active'));
+    document.querySelector('.weight-boxes span:nth-child(2)').classList.add('active');
+    document.getElementById('modalQty').innerText=modalQty;
+}
+
+function closeModal(){modal.classList.remove('active');}
+function setWeight(w,e){weight=w;document.querySelectorAll('.weight-boxes span').forEach(s=>s.classList.remove('active'));e.classList.add('active');updatePrice();}
+function updatePrice(){mPrice.innerText=Math.round(activeItem.base*(weight/500));}
+function changeModalQty(v){modalQty=Math.max(1,modalQty+v);document.getElementById('modalQty').innerText=modalQty;}
+
+function addToCart(){
+    const key=`${activeItem.name} (${weight}g)`;
+    const price=parseInt(mPrice.innerText);
+    if(!cart[key]) cart[key]={qty:0,price};
+    cart[key].qty+=modalQty;
+    count+=modalQty;
+    total+=price*modalQty;
+    updateCart();
+    showToast();
+    closeModal();
+}
+
+function updateCart(){
+    cartItems.innerHTML='';
+    countEl.innerText=count;
+    totalEl.innerText=total;
+    for(let k in cart){
+        const div=document.createElement('div');
+        div.className='cart-item added';
+        div.innerHTML=`${k} x${cart[k].qty} <span><button onclick="change('${k}',-1)">-</button><button onclick="change('${k}',1)">+</button></span>`;
+        cartItems.appendChild(div);
+    }
+}
+
+function change(k,d){
+    cart[k].qty+=d;
+    total+=cart[k].price*d;
+    count+=d;
+    if(cart[k].qty<=0) delete cart[k];
+    updateCart();
+}
+
+function toggleCart(){cartDiv.classList.toggle('open');}
+function setCat(c,e){cat=c;document.querySelectorAll('.categories button').forEach(b=>b.classList.remove('active'));e.classList.add('active');render();}
+function searchItems(v){search=v.toLowerCase();render();}
+function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}
+function toggleDark(){document.body.classList.toggle('dark');}
+function checkout(){
+    let loc=document.getElementById('location').value||"Not specified";
+    let msg=`Hello Konaseema Specials 🌸\nLocation: ${loc}\nOrder:\n`;
+    for(let k in cart){msg+=`• ${k} x${cart[k].qty}\n`}
+    msg+=`Total: ₹${total}`;
+    window.open(`https://wa.me/${ADMIN_PHONE}?text=${encodeURIComponent(msg)}`);
+}
+
+// Toast animation
+function showToast(){
+    toast.style.opacity=1;
+    setTimeout(()=>{toast.style.opacity=0;},1500);
+}
+
+render();
+renderFeatured();
