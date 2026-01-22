@@ -116,7 +116,7 @@ function toggleDark(){document.body.classList.toggle('dark');}
 // Checkout via WhatsApp
 function checkout(){
     let loc=document.getElementById('location').value||"Not specified";
-    let msg=`Hello Home 🌸\nLocation: ${loc}\nOrder:\n`;
+    let msg=`Hello \nLocation: ${loc}\nOrder:\n`;
     for(let k in cart){msg+=`• ${k} x${cart[k].qty}\n`}
     msg+=`Total: ₹${total}`;
     window.open(`https://wa.me/${ADMIN_PHONE}?text=${encodeURIComponent(msg)}`);
