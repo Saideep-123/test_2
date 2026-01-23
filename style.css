@@ -12,7 +12,7 @@ header{position:sticky;top:0;background:#fff;padding:.7rem 1rem;display:flex;ali
 .toggle{border:none;background:#eee;border-radius:50%;padding:.5rem .7rem;}
 
 /* Hero */
-.hero{height:50vh;background:url('https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;}
+.hero{height:50vh;background:url('https://i.pinimg.com/1200x/88/f4/75/88f475e811bb1f0949c46d992f5498a3.jpg') center/cover no-repeat;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;}
 .hero::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.5);}
 .hero h1{color:#fff;font-size:2rem;z-index:1;margin-bottom:1rem;}
 .hero button{z-index:1;padding:.7rem 1.5rem;border:none;border-radius:50px;background:#c0392b;color:#fff;}
